@@ -10,27 +10,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="问题背景项目采用的是 react + webpack 开发模式。其中，ManageLayout.js 文件的主体代码如下图所示：
 
-该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。
-然后呢，我在另">
+该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决-React-编程报错：Element-type-is-invalid：expected-a-string-or-a-class-fun">
 <meta property="og:url" content="http://yoursite.com/2018/09/12/解决-React-编程报错：Element-type-is-invalid：expected-a-string-or-a-class-fun/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="问题背景项目采用的是 react + webpack 开发模式。其中，ManageLayout.js 文件的主体代码如下图所示：
 
-该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。
-然后呢，我在另">
+该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1883670-5927f98c18fafc67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1883670-19c500f4009f9f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1883670-d321c2168a50a99e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1883670-9a21b179124a2d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-09-12T02:36:57.952Z">
+<meta property="og:updated_time" content="2018-09-12T02:39:15.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决-React-编程报错：Element-type-is-invalid：expected-a-string-or-a-class-fun">
 <meta name="twitter:description" content="问题背景项目采用的是 react + webpack 开发模式。其中，ManageLayout.js 文件的主体代码如下图所示：
 
-该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。
-然后呢，我在另">
+该文件主要功能：导出了两个类： ManageMainLayout 和 LeftNavMenu，用于整体的布局之用（其实细节此处可以忽略）。注意导出的不同方式：一个采用default默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1883670-5927f98c18fafc67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -190,6 +187,7 @@
         <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>项目采用的是 react + webpack 开发模式。其中，ManageLayout.js 文件的主体代码如下图所示：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1883670-5927f98c18fafc67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ManageLayout.js 文件"></p>
 <p>该文件主要功能：导出了两个类： <code>ManageMainLayout</code> 和 <code>LeftNavMenu</code>，用于整体的布局之用（其实细节此处可以忽略）。<strong>注意</strong>导出的不同方式：一个采用<code>default</code>默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。</p>
+<a id="more"></a>
 <p>然后呢，我在另一个 JavaScript 文件里，做了如下面代码的导入引用：<br><code>import { ManageMainLayout } from &#39;../../components/ManageLayout&#39;</code></p>
 <p>结果，console 控制台就报错了。错误信息信息如下所示：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1883670-19c500f4009f9f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="报错信息"></p>

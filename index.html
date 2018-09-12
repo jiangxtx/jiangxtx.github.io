@@ -174,22 +174,9 @@
         <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>项目采用的是 react + webpack 开发模式。其中，ManageLayout.js 文件的主体代码如下图所示：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1883670-5927f98c18fafc67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ManageLayout.js 文件"></p>
 <p>该文件主要功能：导出了两个类： <code>ManageMainLayout</code> 和 <code>LeftNavMenu</code>，用于整体的布局之用（其实细节此处可以忽略）。<strong>注意</strong>导出的不同方式：一个采用<code>default</code>默认导出方式，另一个则采用了一般导出方式。这也正是我下面出错的原因所在。</p>
-<p>然后呢，我在另一个 JavaScript 文件里，做了如下面代码的导入引用：<br><code>import { ManageMainLayout } from &#39;../../components/ManageLayout&#39;</code></p>
-<p>结果，console 控制台就报错了。错误信息信息如下所示：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1883670-19c500f4009f9f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="报错信息"></p>
-<blockquote>
-<p>相信大牛、大神级的人物，看到此处可能已经立即锁定错误的原因了。不知道也不要紧，下面详解！</p>
-</blockquote>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>这类错误，往往都比较隐蔽，而且没有指向具体的错误代码，不太容易定位到具体代码位置。</p>
-<p>几番思虑、修改后，也未能得到有效解决。于是，求助于网上大神，百度（或Google）一下吧！在<code>Stack Overflow</code>的一篇帖子中，我找到了蛛丝马迹。给我灵感的片段如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1883670-d321c2168a50a99e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="源于 Stack Overflow 的见解"></p>
-<p>可不是么！于是我立刻修改代码如下：</p>
-<p><code>import ManageMainLayout from &#39;../../components/ManageLayout&#39; ;</code></p>
-<p>再启动服务，调试，立马通过了！汗！引入默认<code>default</code>导出的函数、类等，我竟然还用<code>{ }</code> 把它给括起来了，这是错误的根源。</p>
-<h2 id="赞美-Stack-Overflow"><a href="#赞美-Stack-Overflow" class="headerlink" title="赞美 Stack Overflow"></a>赞美 Stack Overflow</h2><p><strong>每个人都有盲点！</strong>就像此处的一个<code>{ }</code>而已，可能有的人压根儿就不会在这个地方犯错，而有的人呢，在这里栽跟头却也找不到“北”！得力于有着像 <code>StackOverflows</code> 这样优秀的平台，集百家之言、通“盲点”之变，而致力于呈现出编程世界的欣欣向荣！在此，再次感谢！</p>
-<p>最后，在 web 开发遇到问题时，强烈推荐去 <code>StackOverflows</code> 网站寻找相关的解决方案与灵感，这个网站确实，牛！！</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1883670-9a21b179124a2d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Stack Overflow Logo"></p>
-
+        
+          <a class="article-more-a" href="/2018/09/12/解决-React-编程报错：Element-type-is-invalid：expected-a-string-or-a-class-fun/#more">more >></a>
+        
       
 
       
