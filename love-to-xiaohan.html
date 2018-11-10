@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
@@ -19,21 +20,52 @@
             flex-direction: column;
         }
         .center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            /* display: flex; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            /* flex-direction: column; */
         }
         .banner {
             background: url(http://pic.90sjimg.com/back_pic/qk/back_origin_pic/00/01/93/98af9dd4545e8afbbf03be7f21cfc04d.jpg) 100%;
         }
     </style>
+
+    <style>
+        body{
+            overflow: hidden;
+            margin: 0;
+        }
+        h1{
+            position: fixed;
+            top: 40%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            transform:translateY(-50%);
+            font-family: 'Love Ya Like A Sister', cursive;
+            font-size: 28px;
+            color: #c70012;
+            padding: 0 20px;
+        }
+
+        @media (min-width:1200px){
+            h1{
+                font-size: 40px;
+            }
+        }
+
+        canvas {
+            position: absolute;
+            z-index: -10;
+        }
+    </style>
+
 </head>
 <body>
 
-<div class="jumbotron center banner">
-    <h1 style="color: #fff;">11.11 节日快乐!</h1>
-</div>
+<canvas></canvas>
+<h1>11.11 节日快乐！</h1>
+
 
 <p class="center">
     <button class="btn btn-primary btn-lg"
@@ -55,13 +87,108 @@
                 <p style="font-weight: bold; color: cornflowerblue;">不用点啦，怎么点 都是相思愁~~~~</p>
                 <p style="font-size: 12px; color: darkgreen;">——最爱你的 仲夏学长 2018-11-10 20:05</p>
             </div>
-           <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>-->
+            <!-- <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-primary">Save changes</button>
+             </div>-->
         </div>
     </div>
 </div>
+
+<script>
+    var canvas = document.querySelector("canvas"),
+        ctx = canvas.getContext("2d");
+
+    var ww,wh;
+
+    function onResize(){
+        ww = canvas.width = window.innerWidth;
+        wh = canvas.height = window.innerHeight;
+    }
+
+    ctx.strokeStyle = "red";
+    ctx.shadowBlur = 25;
+    ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+
+    var precision = 100;
+    var hearts = [];
+    var mouseMoved = false;
+    function onMove(e){
+        mouseMoved = true;
+        if(e.type === "touchmove"){
+            hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
+            hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
+        }
+        else{
+            hearts.push(new Heart(e.clientX, e.clientY));
+            hearts.push(new Heart(e.clientX, e.clientY));
+        }
+    }
+
+    var Heart = function(x,y){
+        this.x = x || Math.random()*ww;
+        this.y = y || Math.random()*wh;
+        this.size = Math.random()*2 + 1;
+        this.shadowBlur = Math.random() * 10;
+        this.speedX = (Math.random()+0.2-0.6) * 8;
+        this.speedY = (Math.random()+0.2-0.6) * 8;
+        this.speedSize = Math.random()*0.05 + 0.01;
+        this.opacity = 1;
+        this.vertices = [];
+        for (var i = 0; i < precision; i++) {
+            var step = (i / precision - 0.5) * (Math.PI * 2);
+            var vector = {
+                x : (15 * Math.pow(Math.sin(step), 3)),
+                y : -(13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
+            }
+            this.vertices.push(vector);
+        }
+    }
+
+    Heart.prototype.draw = function(){
+        this.size -= this.speedSize;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        ctx.save();
+        ctx.translate(-1000,this.y);
+        ctx.scale(this.size, this.size);
+        ctx.beginPath();
+        for (var i = 0; i < precision; i++) {
+            var vector = this.vertices[i];
+            ctx.lineTo(vector.x, vector.y);
+        }
+        ctx.globalAlpha = this.size;
+        ctx.shadowBlur = Math.round((3 - this.size) * 10);
+        ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+        ctx.shadowOffsetX = this.x + 1000;
+        ctx.globalCompositeOperation = "screen"
+        ctx.closePath();
+        ctx.fill()
+        ctx.restore();
+    };
+
+
+    function render(a){
+        requestAnimationFrame(render);
+
+        hearts.push(new Heart())
+        ctx.clearRect(0,0,ww,wh);
+        for (var i = 0; i < hearts.length; i++) {
+            hearts[i].draw();
+            if(hearts[i].size <= 0){
+                hearts.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+
+    onResize();
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("touchmove", onMove);
+    window.addEventListener("resize", onResize);
+    requestAnimationFrame(render);
+</script>
 
 </body>
 </html>
